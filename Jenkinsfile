@@ -14,7 +14,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn clean site'
+                sh 'mvn clean install'
             }
         }
         stage('Publish Reports') {
