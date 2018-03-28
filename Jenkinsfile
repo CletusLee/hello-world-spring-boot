@@ -28,5 +28,12 @@ pipeline {
                 sh "docker build -t name ."
             }
         }
+        stage('Deploy') {
+            steps {
+                withAWS(region:'eu-west-1') {
+                    // do something
+                }
+            }
+        }
     }
 }
