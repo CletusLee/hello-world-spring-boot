@@ -23,5 +23,10 @@ pipeline {
                junit 'target/surefire-reports/TEST-*.xml'
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                docker.build("my-image:${env.BUILD_ID}")
+            }
+        }
     }
 }
