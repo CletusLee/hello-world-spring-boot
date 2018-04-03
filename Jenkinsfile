@@ -15,6 +15,11 @@ pipeline {
                 }
             }
             steps {
+                script {
+                    def pom = readMavenPom file: 'pom.xml'
+                    VERSION = pom.version
+                }
+                echo "${VERSION}"
                 sh 'mvn clean install'
             }
         }
@@ -31,7 +36,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'echo ${env.JOB_NAME}'
+
             }
         }
     }
