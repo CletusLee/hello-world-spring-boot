@@ -21,7 +21,7 @@ pipeline {
                     def pom = readMavenPom file: 'pom.xml'
                     VERSION = pom.version
                 }
-                echo "${VERSION}"
+                echo '${VERSION}'
                 sh 'mvn clean install'
             }
         }
@@ -34,11 +34,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh "docker build -t name ."
-            }
-        }
-        stage('Deploy') {
-            steps {
-
             }
         }
     }
