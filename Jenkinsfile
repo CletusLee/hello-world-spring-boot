@@ -34,16 +34,7 @@ pipeline {
             steps {
                 script {
                     customImage = docker.build("hello-world:${env.BUILD_ID}")
-                }
-            }
-        }
-        stage('Push Image') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
-                        app.push(customImage)
-                        app.push("latest")
-                    }
+                    customImage.push()
                 }
             }
         }
