@@ -33,8 +33,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://docker.io/cletus', 'DockerHub') {
-                        customImage = docker.build("hello-world:${env.BUILD_ID}")
+                    docker.withRegistry('https://docker.io', 'DockerHub') {
+                        customImage = docker.build("cletus/hello-world:${env.BUILD_ID}")
                         customImage.push()
                     }
 
