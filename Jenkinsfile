@@ -33,7 +33,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io', 'DockerHub') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
                         customImage = docker.build("hello-world:${env.BUILD_ID}")
                         customImage.push()
                     }
