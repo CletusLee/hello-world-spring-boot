@@ -3,6 +3,10 @@
 pipeline {
     agent any
 
+    environment {
+        customImage = ''
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -17,11 +21,6 @@ pipeline {
                 }
             }
             steps {
-                script {
-                    def pom = readMavenPom file: 'pom.xml'
-                    VERSION = pom.version
-                }
-                echo '${VERSION}'
                 sh 'mvn clean install'
             }
         }
@@ -33,7 +32,19 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t name ."
+                script {
+                    customImage = docker.build("hello-world:${env.BUILD_ID}")
+                }
+            }
+        }
+        stage('Push Image') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
+                        app.push(customImage)
+                        app.push("latest")
+                    }
+                }
             }
         }
     }
