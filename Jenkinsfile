@@ -33,9 +33,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    customImage = docker.build("hello-world:${env.BUILD_ID}")
-                    docker.withServer('https://index.docker.io', 'DockerHub') {
-
+                    docker.withRegistry('https://hub.docker.com/', 'DockerHub') {
+                        customImage = docker.build("hello-world:${env.BUILD_ID}")
                         customImage.push()
                     }
 
