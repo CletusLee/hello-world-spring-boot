@@ -1,5 +1,10 @@
 pipeline {
     agent any
+
+    environment {
+
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -30,9 +35,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                withAWS(region:'eu-west-1') {
-                    // do something
-                }
+                sh 'echo ${env.JOB_NAME}'
             }
         }
     }
