@@ -48,7 +48,8 @@ pipeline {
 
                     }
 
-                    sh 'docker login -u ${userName} -p "${password}"'
+                    echo "${userName} + ${password}"
+                    sh 'docker login -u=${userName} -p="${password}"'
                     docker.withRegistry('https://docker.io', 'DockerDocker') {
                         customImage = docker.build("cletus/hello-world:${env.BUILD_ID}")
                         customImage.push()
