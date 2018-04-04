@@ -41,8 +41,11 @@ pipeline {
                   // or inside double quotes for string interpolation
                   echo "username is $USERNAME"
                   sh 'docker login -u=${USERNAME} -p="{$PASSWORD}"'
-                  customImage = docker.build("cletus/hello-world:${env.BUILD_ID}")
-                  customImage.push()
+                  script {
+                      customImage = docker.build("cletus/hello-world:${env.BUILD_ID}")
+                      customImage.push()
+                  }
+
                 }
 //                script {
 //                    docker.withRegistry('https://docker.io', 'DockerDocker') {
