@@ -5,6 +5,8 @@ pipeline {
 
     environment {
         customImage = ''
+        userName = ''
+        password = ''
     }
 
     stages {
@@ -40,21 +42,18 @@ pipeline {
                   echo USERNAME
                   // or inside double quotes for string interpolation
                   echo "username is ${USERNAME}"
-
-                  script {
-                      sh 'docker login -u=${USERNAME} -p="{$PASSWORD}"'
-                      customImage = docker.build("cletus/hello-world:${env.BUILD_ID}")
-                      customImage.push()
-                  }
+                  userName = USERNAME
+                  password = PASSWORD
 
                 }
-//                script {
-//                    docker.withRegistry('https://docker.io', 'DockerDocker') {
-//                        customImage = docker.build("cletus/hello-world:${env.BUILD_ID}")
-//                        customImage.push()
-//                    }
-//
-//                }
+                script {
+                    sh 'docker login -u ${userName} -p "${password}"'
+                    docker.withRegistry('https://docker.io', 'DockerDocker') {
+                        customImage = docker.build("cletus/hello-world:${env.BUILD_ID}")
+                        customImage.push()
+                    }
+
+                }
             }
         }
     }
