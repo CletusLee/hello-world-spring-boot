@@ -40,6 +40,7 @@ pipeline {
                         docker.withRegistry('https://docker.io') {
                             customImage = docker.build("cletus/hello-world:${env.BUILD_ID}")
                             customImage.push()
+                            customImage.push('latest')
                         }
                     }
                 }
