@@ -46,5 +46,12 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to ECS cluster') {
+            steps {
+                withAWS(region:'us-west-2', credentials:'aws') {
+                    sh 'aws --version'
+                }
+            }
+        }
     }
 }
