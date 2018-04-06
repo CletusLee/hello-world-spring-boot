@@ -49,8 +49,7 @@ pipeline {
         stage('Deploy to ECS cluster') {
             steps {
                 withAWS(region:'us-west-2', credentials:'aws') {
-                    sh 'ecs-cli configure --cluster CHC-CIH-EFT --region us-west-2 --config-name hello-world'
-                    sh 'ecs-cli ps'
+                    sh 'aws ecs update-service --service AAA --force-new-deployment'
                 }
             }
         }
