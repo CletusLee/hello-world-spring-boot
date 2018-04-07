@@ -49,7 +49,7 @@ pipeline {
             steps {
                 withAWS(region:'us-west-2', credentials:'aws') {
                     sh 'aws ecs update-service --cluster ${clusterName} --service ${serviceName} --force-new-deployment'
-                    sh 'aws ecs wait service-stable --cluster ${clusterName} --service ${serviceName}'
+                    sh 'aws ecs wait services-stable --cluster ${clusterName} --service ${serviceName}'
                 }
             }
         }
