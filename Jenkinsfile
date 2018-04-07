@@ -4,9 +4,8 @@ pipeline {
     agent any
 
     environment {
-        customImage = ''
-        userName = ''
-        password = ''
+        clusterName = 'chc-microservice'
+        serviceName = 'hello-world'
     }
 
     stages {
@@ -49,7 +48,8 @@ pipeline {
         stage('Deploy to ECS cluster') {
             steps {
                 withAWS(region:'us-west-2', credentials:'aws') {
-                    sh 'aws ecs update-service --cluster chc-microservice --service hello-world --force-new-deployment'
+                    sh 'aws ecs update-service --cluster ${clusterName} --service ${serviceName} --force-new-deployment'
+                    sh 'aws ecs wait service-stable --cluster ${clusterName} --service ${serviceName}'
                 }
             }
         }
