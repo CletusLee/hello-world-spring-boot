@@ -49,7 +49,7 @@ pipeline {
         stage('Deploy to ECS cluster') {
             steps {
                 withAWS(region:'us-west-2', credentials:'aws') {
-                    sh 'aws ecs update-service --cluster CHC-CIH-EFT --service AAA --force-new-deployment'
+                    sh 'aws ecs update-service --cluster chc-microservice --service hello-world --force-new-deployment'
                 }
             }
         }
