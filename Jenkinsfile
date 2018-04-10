@@ -50,6 +50,8 @@ pipeline {
             input {
                 message "Are you going to deploy?"
             }
+            steps {
+            }
         }
         stage('Deploy to ECS cluster') {
             steps {
