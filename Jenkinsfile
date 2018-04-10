@@ -45,6 +45,13 @@ pipeline {
                 }
             }
         }
+        stage('Approve') {
+            steps {
+                timeout(time:1, unit:'DAY') {
+                    input message:'Approve deployment?', submitter: 'it-ops'
+                }
+            }
+        }
         stage('Deploy to ECS cluster') {
             steps {
                 withAWS(region:'us-west-2', credentials:'aws') {
