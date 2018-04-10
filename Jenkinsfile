@@ -54,7 +54,7 @@ pipeline {
                 }
             }
             when {
-                expression { '${params.SHOULD_DEPLOY}' == 'true' }
+                expression { params.SHOULD_DEPLOY == true }
             }
             steps {
 
