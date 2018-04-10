@@ -1,8 +1,9 @@
-#!groovy
-
 pipeline {
     agent any
 
+    options {
+        timeout(time: 1, unit: 'HOURS')
+    }
     environment {
         clusterName = 'chc-microservice'
         serviceName = 'hello-world'
@@ -46,10 +47,8 @@ pipeline {
             }
         }
         stage('Approve') {
-            steps {
-                timeout(time:1, unit:'DAY') {
-                    input message:'Approve deployment?', submitter: 'it-ops'
-                }
+            input {
+                message "Are you going to deploy?"
             }
         }
         stage('Deploy to ECS cluster') {
