@@ -54,7 +54,7 @@ pipeline {
                 }
             }
             when {
-                equals expected: 'true', actual: '${SHOULD_DEPLOY}'
+                expression { '${SHOULD_DEPLOY}' == 'true' }
             }
             steps {
 
