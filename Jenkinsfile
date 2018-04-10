@@ -46,13 +46,12 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to ECS cluster?') {
+        stage('Deploy to ECS cluster') {
             input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                submitter "alice,bob"
+                message "Deploy to ECS?"
+                ok "Yes."
                 parameters {
-                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+                    string(name: 'booleanParam', defaultValue: 'false', description: '')
                 }
             }
             steps {
