@@ -8,7 +8,7 @@ import org.junit.Test;
 public class ExampleTest {
 
     @Test
-    public void test1() throws Exception {
-        throw new Exception();
+    public void test1() {
+
     }
 }
