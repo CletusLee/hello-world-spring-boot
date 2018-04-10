@@ -49,15 +49,15 @@ pipeline {
         stage('Deploy to ECS cluster') {
             input {
                 message "Deploy to ECS?"
-                ok "Yes."
                 parameters {
                     booleanParam(name: 'SHOULD_DEPLOY', defaultValue: false, description: '')
                 }
             }
+            when {
+                equals expected: 'true', actual: '${SHOULD_DEPLOY}'
+            }
             steps {
-                when {
-                    equals expected: 'true', actual: '${SHOULD_DEPLOY}'
-                }
+
                 withAWS(region:'us-west-2', credentials:'aws') {
                     sh 'aws ecs update-service --cluster ${clusterName} --service ${serviceName} --force-new-deployment'
                     sh 'aws ecs wait services-stable --cluster ${clusterName} --service ${serviceName}'
