@@ -46,14 +46,10 @@ pipeline {
                 }
             }
         }
-        stage('Approve') {
+        stage('Deploy to ECS cluster?') {
             input {
                 message "Are you going to deploy?"
             }
-            steps {
-            }
-        }
-        stage('Deploy to ECS cluster') {
             steps {
                 withAWS(region:'us-west-2', credentials:'aws') {
                     sh 'aws ecs update-service --cluster ${clusterName} --service ${serviceName} --force-new-deployment'
