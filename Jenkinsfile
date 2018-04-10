@@ -56,7 +56,7 @@ pipeline {
             }
             steps {
                 when {
-                    equals expected: true, actual: ${SHOULD_DEPLOY}
+                    equals expected: 'true', actual: '${SHOULD_DEPLOY}'
                 }
                 withAWS(region:'us-west-2', credentials:'aws') {
                     sh 'aws ecs update-service --cluster ${clusterName} --service ${serviceName} --force-new-deployment'
