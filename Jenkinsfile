@@ -54,7 +54,7 @@ pipeline {
                 withAWS(region:'us-west-2', credentials:'aws') {
                     //sh 'aws ecs update-service --cluster ${clusterName} --service ${serviceName} --force-new-deployment'
                     //sh 'aws ecs wait services-stable --cluster ${clusterName} --service ${serviceName}'
-                    sh 'ecs-deploy --cluster ${clusterName} --service ${serviceName} --image cletus/${serviceName}:${env.BUILD_ID}'
+                    sh 'ecs-deploy --cluster ${clusterName} --service ${serviceName} --image cletus/${serviceName}:${BUILD_ID}'
                 }
             }
         }
