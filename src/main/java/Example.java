@@ -12,6 +12,11 @@ public class Example {
         return "Hello World - v3! Cletus's version6";
     }
 
+    @RequestMapping("/test")
+    String testPage() {
+        return "This is a test page";
+    }
+
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Example.class, args);
     }
