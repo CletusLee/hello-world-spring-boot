@@ -36,13 +36,10 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'DockerDocker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                        sh 'docker login --username=${USERNAME} --password="${PASSWORD}"'
-                        docker.withRegistry('https://988532124766.dkr.ecr.us-west-2.amazonaws.com', 'ecr:${regionName}:DockerDocker') {
-                            customImage = docker.build("cletus/${serviceName}:${env.BUILD_ID}")
-                            customImage.push()
-                            customImage.push('latest')
-                        }
+                    docker.withRegistry('https://988532124766.dkr.ecr.us-west-2.amazonaws.com', 'ecr:${regionName}:DockerDocker') {
+                        customImage = docker.build("cletus/${serviceName}:${env.BUILD_ID}")
+                        customImage.push()
+                        customImage.push('latest')
                     }
                 }
             }
