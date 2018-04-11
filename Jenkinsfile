@@ -7,6 +7,7 @@ pipeline {
     environment {
         clusterName = 'chc-microservice'
         serviceName = 'hello-world'
+        regionName = 'us-west-2'
     }
 
     stages {
@@ -37,7 +38,7 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'DockerDocker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh 'docker login --username=${USERNAME} --password="${PASSWORD}"'
-                        docker.withRegistry('https://docker.io') {
+                        docker.withRegistry('https://988532124766.dkr.ecr.us-west-2.amazonaws.com', 'ecr:${regionName}:DockerDocker') {
                             customImage = docker.build("cletus/${serviceName}:${env.BUILD_ID}")
                             customImage.push()
                             customImage.push('latest')
