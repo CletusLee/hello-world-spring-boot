@@ -35,13 +35,13 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                script {
+
                     docker.withRegistry('https://988532124766.dkr.ecr.us-west-2.amazonaws.com/chc-cih', 'ecr:${regionName}:DockerDocker') {
                         customImage = docker.build("${serviceName}:${env.BUILD_ID}")
                         customImage.push()
                         customImage.push('latest')
                     }
-                }
+
             }
         }
         stage('Deploy to ECS cluster') {
