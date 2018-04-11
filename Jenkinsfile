@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         clusterName = 'chc-microservice'
-        serviceName = 'hello-world'
+        serviceName = 'chc-cih'
         regionName = 'us-west-2'
     }
 
