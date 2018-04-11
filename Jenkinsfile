@@ -38,7 +38,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'DockerDocker', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                         sh 'docker login --username=${USERNAME} --password="${PASSWORD}"'
                         docker.withRegistry('https://docker.io') {
-                            customImage = docker.build("cletus/hello-world:${env.BUILD_ID}")
+                            customImage = docker.build("cletus/${serviceName}:${env.BUILD_ID}")
                             customImage.push()
                             customImage.push('latest')
                         }
@@ -52,8 +52,9 @@ pipeline {
             }
             steps {
                 withAWS(region:'us-west-2', credentials:'aws') {
-                    sh 'aws ecs update-service --cluster ${clusterName} --service ${serviceName} --force-new-deployment'
-                    sh 'aws ecs wait services-stable --cluster ${clusterName} --service ${serviceName}'
+                    //sh 'aws ecs update-service --cluster ${clusterName} --service ${serviceName} --force-new-deployment'
+                    //sh 'aws ecs wait services-stable --cluster ${clusterName} --service ${serviceName}'
+                    sh 'ecs-deploy --cluster ${clusterName} --service ${serviceName} --image cletus/${serviceName}:${env.BUILD_ID}'
                 }
             }
         }
