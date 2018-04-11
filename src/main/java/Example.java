@@ -14,7 +14,7 @@ public class Example {
 
     @RequestMapping("/test")
     String testPage() {
-        return "This is a test page";
+        return "Changed the content";
     }
 
     public static void main(String[] args) throws Exception {
