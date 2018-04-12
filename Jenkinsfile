@@ -1,12 +1,7 @@
 pipeline {
     agent any
 
-    parameters {
-        choice(
-            choices: 'greeting\nsilence',
-            description: '',
-            name: 'REQUESTED_ACTION')
-    }
+    parameters { booleanParam(name: 'DEBUG_BUILD', defaultValue: true, description: '') }
 
     options {
         timeout(time: 1, unit: 'HOURS')
