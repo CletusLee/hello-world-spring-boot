@@ -1,7 +1,12 @@
 pipeline {
     agent any
 
-    parameters { booleanParam(name: 'DEBUG_BUILD', defaultValue: true, description: '') }
+    parameters {
+        choice(
+            choices: 'DEV\nQA\nCERT\nPROD',
+            description: '',
+            name: 'ENV')
+    }
 
     options {
         timeout(time: 1, unit: 'HOURS')
@@ -26,6 +31,7 @@ pipeline {
                 }
             }
             steps {
+                sh '[ENVIRONMENT] = ${params.ENV}'
                 sh 'mvn clean compile'
             }
         }
