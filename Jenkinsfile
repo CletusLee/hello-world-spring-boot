@@ -24,7 +24,18 @@ pipeline {
                 }
             }
             steps {
-                sh 'mvn clean install'
+                sh 'mvn clean install -DskipTests'
+            }
+        }
+        stage('Unit Test') {
+            agent {
+                docker {
+                    image 'maven:3.5.3-jdk-8'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh 'mvn test'
             }
         }
         stage('Publish Reports') {
