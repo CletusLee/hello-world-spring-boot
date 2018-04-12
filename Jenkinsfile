@@ -31,7 +31,6 @@ pipeline {
                 }
             }
             steps {
-                sh '[ENVIRONMENT] = ${params.ENV}'
                 sh 'mvn clean compile'
             }
         }
