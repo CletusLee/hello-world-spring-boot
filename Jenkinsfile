@@ -67,6 +67,11 @@ pipeline {
                 }
             }
         }
+        stage('QA Auto Test') {
+            steps {
+                sh "echo test"
+            }
+        }
         stage('Deploy to ECS cluster') {
             input {
                 message "Deploy to ECS?"
