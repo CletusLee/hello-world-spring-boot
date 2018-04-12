@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Publish Reports') {
             steps {
-               publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'target/jacoco/', reportFiles: 'index.html', reportName: 'Code Coverage', reportTitles: ''])
+               publishHTML([allowMissing: true, alwaysLinkToLastBuild: false, keepAll: true, reportDir: 'target/jacoco', reportFiles: 'index.html', reportName: 'Code Coverage', reportTitles: ''])
                junit 'target/surefire-reports/TEST-*.xml'
             }
         }
