@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    parameters {
+        choice(
+            choices: 'greeting\nsilence',
+            description: '',
+            name: 'REQUESTED_ACTION')
+    }
+
     options {
         timeout(time: 1, unit: 'HOURS')
     }
