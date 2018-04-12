@@ -1,12 +1,12 @@
 pipeline {
     agent any
 
-    parameters {
-        choice(
-            choices: 'DEV\nQA\nCERT\nPROD',
-            description: '',
-            name: 'ENV')
-    }
+//    parameters {
+//        choice(
+//            choices: 'DEV\nQA\nCERT\nPROD',
+//            description: '',
+//            name: 'ENV')
+//    }
 
     options {
         timeout(time: 1, unit: 'HOURS')
@@ -31,7 +31,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'echo ${ENV}'
+//                sh 'echo ${ENV}'
                 sh 'mvn clean compile'
             }
         }
