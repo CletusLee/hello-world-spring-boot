@@ -31,6 +31,7 @@ pipeline {
                 }
             }
             steps {
+                sh 'echo ${ENV}'
                 sh 'mvn clean compile'
             }
         }
