@@ -16,6 +16,6 @@ public class ExampleTest {
 
     @Test
     public void homeMessageShouldBeFun() {
-        assertThat(example.home(), is("Hello World!"));
+        assertThat(example.home(), is("Hello World! ABC"));
     }
 }
