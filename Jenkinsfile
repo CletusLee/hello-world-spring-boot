@@ -86,7 +86,7 @@ pipeline {
             }
             steps {
                 withAWS(region:'us-west-2', credentials:'aws') {
-                    sh 'ecs deploy ${clusterName} ${serviceName} -i 988532124766.dkr.ecr.us-west-2.amazonaws.com/${serviceName}:${BUILD_ID}'
+                    sh 'ecs-deploy -r us-west-2 -c ${clusterName} -n ${serviceName} -i 988532124766.dkr.ecr.us-west-2.amazonaws.com/${serviceName}:${BUILD_ID} -t 6000'
                 }
             }
         }
